@@ -2,6 +2,8 @@ package edu.projectjava.api.entities;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import edu.projectjava.api.entities.pk.OrderItemPk;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -11,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "tb_order_item")
 public class OrderItem {
 	@EmbeddedId
-	private OrderItemPk id;
+	private OrderItemPk id = new OrderItemPk();
 	private Integer quantity;
 	private Double price;
 	
@@ -29,7 +31,7 @@ public class OrderItem {
 		return Objects.hash(id);
 	}
 	
-	
+	@JsonIgnore
 	public Order getOrder() {
 		return this.id.getOrder();
 	}
